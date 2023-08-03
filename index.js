@@ -7,10 +7,12 @@ const { expressMiddleware } = require("@apollo/server/express4");
 const http = require("http");
 const cors = require("cors");
 const fakeData = require("./fakeData");
+const router = require("./src/routes");
 
 dotenv.config();
 
 const app = express();
+
 const httpServer = http.createServer(app);
 
 const typeDefs = `#graphql
@@ -59,6 +61,8 @@ const server = new ApolloServer({
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+router(app);
 // await new Promise((resolve) => )
 // app.use("/", (req, res) => {
 //   res.setHeader("Content-Type", "application/json");

@@ -13,61 +13,54 @@ dotenv.config();
 
 const app = express();
 
-const httpServer = http.createServer(app);
+// const httpServer = http.createServer(app);
 
-const typeDefs = `#graphql
- type Folder {
-  id: String,
-  name: String,
-  createdAt: String,
-  author: Author,
-  authorId: String,
+// const typeDefs = `#graphql
+//  type Folder {
+//   id: String,
+//   name: String,
+//   createdAt: String,
+//   author: Author,
+//   authorId: String,
 
+//  }
+//  type Author {
+//   name: String,
+//   id: String,
+//  }
+//  type Query {
+//   folders: [Folder]
+//  }
+// `;
+// const resolvers = {
+//   Query: {
+//     folders: () => {
+//       return fakeData.folders;
+//     },
+//   },
+//   Folder: {
+//     author: (parent, args) => {
+//       const authorId = parent.authorId;
+//       return fakeData.author.id === authorId ? fakeData.author : null;
+//     },
+//   },
+// };
 
- }
- type Author {
-  name: String,
-  id: String,
- }
- type Query {
-  folders: [Folder]
- }
-`;
-const resolvers = {
-  Query: {
-    folders: () => {
-      return fakeData.folders;
-    },
-  },
-  Folder: {
-    author: (parent, args) => {
-      const authorId = parent.authorId;
-      return fakeData.author.id === authorId ? fakeData.author : null;
-    },
-  },
-};
+// const server = new ApolloServer({
+//   typeDefs,
+//   resolvers,
+//   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+// });
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-});
-
-(async function startServer() {
-  await server.start();
-  app.use(expressMiddleware(server));
-})();
-// startServer();
+// (async function startServer() {
+//   await server.start();
+//   app.use(expressMiddleware(server));
+// })();
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 router(app);
-// await new Promise((resolve) => )
-// app.use("/", (req, res) => {
-//   res.setHeader("Content-Type", "application/json");
-//   res.status(200).send({ message: "run okkkk" });
-// });
 const port = process.env.PORT;
 app.listen(port || 4000, (err) => {
   if (err) {

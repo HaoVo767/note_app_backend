@@ -1,4 +1,5 @@
 const db = require("../config/connect_db");
+const { createToken } = require("../auth/accessToken");
 
 const loginController = (req, res) => {
   const { UserName, Password } = req.body;
@@ -11,8 +12,9 @@ const loginController = (req, res) => {
         res.setHeader("Content-Type", "application/json");
         res.status(200).send({ message: "username or password incorrect" });
       } else {
+        const accessToken = createToken({ UserName, Password, id: result[0].ID });
         res.setHeader("Content-Type", "application/json");
-        res.status(200).send({ message: "OK", user: { id: result[0].ID, userName: result[0].UserName } });
+        res.status(200).send({ message: "OK", accessToken, user: { id: result[0].ID, userName: result[0].UserName } });
       }
     }
   });

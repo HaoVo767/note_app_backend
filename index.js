@@ -6,8 +6,8 @@ const bodyParser = require("body-parser");
 const { expressMiddleware } = require("@apollo/server/express4");
 const http = require("http");
 const cors = require("cors");
-const fakeData = require("./fakeData");
 const router = require("./src/routes");
+const { authToken } = require("./src/auth/accessToken");
 
 dotenv.config();
 
@@ -56,8 +56,8 @@ const app = express();
 //   await server.start();
 //   app.use(expressMiddleware(server));
 // })();
-
 app.use(cors());
+app.use(authToken);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 router(app);

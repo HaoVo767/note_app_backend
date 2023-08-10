@@ -2,7 +2,7 @@ const db = require("../config/connect_db");
 
 const getNotes = (req, res) => {
   const { folderId } = req.params;
-  db.query(`SELECT * FROM notes WHERE folderId = ?`, folderId, (err, result) => {
+  db.query(`SELECT * FROM notes WHERE folderId = ? ORDER BY createdAt DESC`, folderId, (err, result) => {
     if (err) {
       res.setHeader("Content-Type", "application/json");
       res.status(400).send({ message: err.message });

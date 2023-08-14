@@ -68,3 +68,5 @@ app.listen(port || 4000, (err) => {
   }
   console.log(`listening on ${port}`);
 });
+
+export default app;

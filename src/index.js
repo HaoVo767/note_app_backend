@@ -6,8 +6,8 @@ const bodyParser = require("body-parser");
 const { expressMiddleware } = require("@apollo/server/express4");
 const http = require("http");
 const cors = require("cors");
-const router = require("./src/routes");
-const { authToken } = require("./src/auth/accessToken");
+const router = require("./routes");
+const { authToken } = require("./auth/accessToken");
 
 dotenv.config();
 

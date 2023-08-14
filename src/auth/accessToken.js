@@ -4,7 +4,7 @@ const createToken = (user) => {
   return jwt.sign(user, process.env.JWT_SECRET_STRING, { expiresIn: "3600s" });
 };
 const authToken = (req, res, next) => {
-  if (req.originalUrl === "/login" || req.originalUrl === "/register") {
+  if (req.originalUrl === "/login" || req.originalUrl === "/register" || req.originalUrl === "/") {
     return next();
   } else {
     if (req.headers.authorization) {

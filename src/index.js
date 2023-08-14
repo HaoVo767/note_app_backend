@@ -57,13 +57,13 @@ const app = express();
 //   app.use(expressMiddleware(server));
 // })();
 app.use(cors());
-app.use(authToken);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.status(200).send({ author: "Hao" });
 });
+app.use(authToken);
 router(app);
 const port = process.env.PORT;
 app.listen(port || 4000, (err) => {
